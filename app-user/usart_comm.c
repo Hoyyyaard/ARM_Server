@@ -6,6 +6,7 @@
 #include "control_def.h"
 #include "ros_rx.h"
 
+extern ros_t ros;
 //´®¿Ú½ÓÊÕ»º³å
 uint8_t buf[ONE_BUF];
 uint8_t max_buf[MAX_BUF_LEN];
@@ -18,6 +19,7 @@ void USER_UART_IDLECallback(UART_HandleTypeDef *huart)
     {
         ros_data_handler(ros_buf);
         memset(ros_buf, 0, ROS_BUF_LEN);
+        
         HAL_UART_Receive_DMA(huart, ros_buf, ROS_BUF_LEN);
     } 
     else if (huart->Instance == USART3)  

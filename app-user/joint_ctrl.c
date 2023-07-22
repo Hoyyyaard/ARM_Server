@@ -1,7 +1,7 @@
 #include "joint_ctrl.h"
 /*标准库文件*/
 #include "control_def.h"
-
+#include "math.h"
 #include "string.h"
 #include "cmsis_os.h"
 #include "tim.h"
@@ -14,6 +14,8 @@ extern QueueHandle_t xViaPointQueue;
 
 BaseType_t xStatus_rx;
 float test[5];
+
+int time = 50;
 
 void joint_init(void)
 {
@@ -34,14 +36,14 @@ void joint_init(void)
 //电控侧：J0逆时针为正，背对底盘90度,J1朝后为正，J2朝前为正，J3朝前为正，J4夹紧为正
 void joint_control(void)
 {    
-    if(!joint.point.flag){    //不是补帧
+    if(joint.point.flag){    //不是补帧
         for(int j=0;j<5;j++){                    
             joint.ros_angle[j] = joint.point.angle[j];
             
             /* ros角度转换为舵机绝对角度 */
             ros_angle_handler(&joint.ros_angle[j], &joint.steering_angle[j], j);
             
-            if(!(joint.steering_angle[j]<-90 | joint.steering_angle[j]>90)){  
+            if(!(joint.steering_angle[j]<10 | joint.steering_angle[j]>165)){  
                 angle2pwm(&joint.steering_angle[j], &joint.pwm[j]);
                 joint.current_angle[j] = joint.steering_angle[j];
             }
@@ -59,15 +61,16 @@ void joint_task(void const *argu) {
     joint_init();    
     for(;;) {
         taskENTER_CRITICAL();
-      
+        
         xStatus_rx = xQueueReceive(xViaPointQueue, &joint.point, 0);       
         if( xStatus_rx == pdPASS ){
+            joint.finish = 0;
             joint_control();
         }
         else joint.finish = 1; //队列为空，一帧路点处理完成，进入等待
                   
         taskEXIT_CRITICAL();
-        vTaskDelayUntil(&thread_wake_time, 2); 
+        vTaskDelayUntil(&thread_wake_time, time);
     }
 }
 
@@ -78,6 +81,7 @@ void joint_task(void const *argu) {
   */
 void ros_angle_handler(float *ros_angle, float *steering_angle, int joint_num)
 {
+    
     switch(joint_num){
         case 0:
         case 1:{

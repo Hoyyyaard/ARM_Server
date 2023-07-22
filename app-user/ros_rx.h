@@ -5,15 +5,16 @@
 #include "control_def.h"
 
 typedef enum{
-    HEAD1_ERROR = 0,
-    HEAD2_ERROR = 1,
-    TAIL_ERROR = 2,
-    GOOD = 3
+    REVING = 0,
+    HEAD1_ERROR = 1,
+    HEAD2_ERROR = 2,
+    TAIL_ERROR = 3,
+    GOOD = 4
 }ros_status_e;
 
 __packed typedef struct{
     float angle[5];
-    float flag; //补帧标志位
+    float flag; //补帧标志位 
 }point_t;
 
 typedef struct{
@@ -23,6 +24,8 @@ typedef struct{
     uint8_t success_rev_cnt;
     
     uint8_t rev_flag;
+    uint8_t good_flag;
+    uint8_t last_rev_flag;
     
      __packed struct {           /* 数据处理共用体 */    
         uint8_t head1;

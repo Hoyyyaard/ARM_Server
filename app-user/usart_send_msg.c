@@ -20,10 +20,12 @@ void usart_msg_send_task(void const *argu) {
     
     for(;;) {
         taskENTER_CRITICAL();
-         /*֡ͷ֡β*/
+         /*֡帧头帧尾*/
         ros_tx.tx_msg.head1 = 0Xcc;
         ros_tx.tx_msg.head2 = 0Xff;
         ros_tx.tx_msg.eof = 0Xaa;
+        
+        
         
         ros_tx.tx_msg.rev_flag = ros.rev_flag;
         ros_tx.tx_msg.finish_flag = joint.finish;

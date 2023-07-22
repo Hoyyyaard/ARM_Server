@@ -48,3 +48,4 @@ steering_motor\ros_msg_pub.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_
 steering_motor\ros_msg_pub.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 steering_motor\ros_msg_pub.o: ../Core/Inc/tim.h
 steering_motor\ros_msg_pub.o: ..\app-user\ros_rx.h
+steering_motor\ros_msg_pub.o: ..\app-user\joint_ctrl.h

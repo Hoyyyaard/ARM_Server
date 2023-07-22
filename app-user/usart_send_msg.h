@@ -16,7 +16,9 @@ typedef struct{
         uint8_t finish_flag;
 
         uint8_t eof;
-    }tx_msg;                  
+    }tx_msg;       
+    
+    uint8_t tx_flag;
 }ros_tx_t;
 
 void usart_msg_send_task(void const *argu);

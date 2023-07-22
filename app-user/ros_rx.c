@@ -47,18 +47,26 @@ void ros_data_handler(uint8_t *pData)
     memset(&ros, 0, sizeof(ros_t));
     memcpy(&ros.rx_angle, pData, ROS_BUF_LEN);
     
+    ros.last_rev_flag = ros.rev_flag; //更新历史接收状态
     if(ros.rx_angle.head1 != 0Xcc){
-        ros.status = HEAD1_ERROR;              
+        ros.status = HEAD1_ERROR;    
+        ros.rev_flag = 0;
         return;
     }
     else if(ros.rx_angle.head2!=0XFF){
-        ros.status = HEAD2_ERROR;              
+        ros.status = HEAD2_ERROR;    
+        ros.rev_flag = 0;
         return;
     }
     else if(ros.rx_angle.eof != 0Xaa) {
-        ros.status = TAIL_ERROR;              
+        ros.status = TAIL_ERROR;  
+        ros.rev_flag = 0;
         return;
     }
-    else ros.status = GOOD;
+    else {
+        ros.status = GOOD;
+        ros.rev_flag = 1;
+        ros.good_flag = 1;
+    }
 }
 
