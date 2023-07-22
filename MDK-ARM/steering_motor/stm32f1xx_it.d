@@ -45,5 +45,3 @@ steering_motor\stm32f1xx_it.o: ../Middlewares/Third_Party/FreeRTOS/Source/includ
 steering_motor\stm32f1xx_it.o: ../Core/Inc/stm32f1xx_it.h
 steering_motor\stm32f1xx_it.o: ..\app-user\usart_comm.h
 steering_motor\stm32f1xx_it.o: ../Core/Inc/usart.h
-steering_motor\stm32f1xx_it.o: ..\app-user\control_def.h
-steering_motor\stm32f1xx_it.o: ../Core/Inc/tim.h

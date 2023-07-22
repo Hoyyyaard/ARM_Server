@@ -11,7 +11,8 @@ typedef struct{
     __packed struct{           
         uint8_t head1;      
         uint8_t head2;      
-
+        
+        uint8_t rev_flag;
         uint8_t finish_flag;
 
         uint8_t eof;

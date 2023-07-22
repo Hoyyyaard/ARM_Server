@@ -7,9 +7,11 @@
 
 #include "control_def.h"
 #include "joint_ctrl.h"
+#include "ros_msg_pub.h"
 
 ros_tx_t ros_tx;
 extern joint_t joint;
+extern ros_t ros;
 
 void usart_msg_send_task(void const *argu) {
     uint32_t thread_wake_time = osKernelSysTick();
@@ -23,6 +25,7 @@ void usart_msg_send_task(void const *argu) {
         ros_tx.tx_msg.head2 = 0Xff;
         ros_tx.tx_msg.eof = 0Xaa;
         
+        ros_tx.tx_msg.rev_flag = ros.rev_flag;
         ros_tx.tx_msg.finish_flag = joint.finish;
         
         memcpy(ros_tx.buff,&ros_tx.tx_msg, ROS_TX_LEN);

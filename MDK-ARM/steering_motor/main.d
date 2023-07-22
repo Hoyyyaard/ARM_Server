@@ -49,6 +49,6 @@ steering_motor\main.o: ../Core/Inc/usart.h
 steering_motor\main.o: ../Core/Inc/gpio.h
 steering_motor\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 steering_motor\main.o: ..\app-user\usart_comm.h
-steering_motor\main.o: ..\app-user\control_def.h
 steering_motor\main.o: ..\app-user\joint_ctrl.h
-steering_motor\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
+steering_motor\main.o: ..\app-user\ros_rx.h
+steering_motor\main.o: ..\app-user\control_def.h

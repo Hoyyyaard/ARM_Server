@@ -404,6 +404,11 @@
               <FileType>1</FileType>
               <FilePath>..\app-user\ros_msg_pub.c</FilePath>
             </File>
+            <File>
+              <FileName>ros_rx.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\app-user\ros_rx.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

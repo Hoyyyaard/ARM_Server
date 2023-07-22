@@ -1,6 +1,7 @@
 steering_motor\joint_ctrl.o: ..\app-user\joint_ctrl.c
 steering_motor\joint_ctrl.o: ..\app-user\joint_ctrl.h
 steering_motor\joint_ctrl.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+steering_motor\joint_ctrl.o: ..\app-user\ros_rx.h
 steering_motor\joint_ctrl.o: ..\app-user\control_def.h
 steering_motor\joint_ctrl.o: ../Core/Inc/usart.h
 steering_motor\joint_ctrl.o: ../Core/Inc/main.h
@@ -46,6 +47,6 @@ steering_motor\joint_ctrl.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/
 steering_motor\joint_ctrl.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 steering_motor\joint_ctrl.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
 steering_motor\joint_ctrl.o: ../Core/Inc/tim.h
-steering_motor\joint_ctrl.o: ..\app-user\usart_comm.h
 steering_motor\joint_ctrl.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 steering_motor\joint_ctrl.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
+steering_motor\joint_ctrl.o: ..\app-user\usart_comm.h

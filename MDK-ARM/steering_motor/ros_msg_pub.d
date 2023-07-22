@@ -16,6 +16,8 @@ steering_motor\ros_msg_pub.o: ../Middlewares/Third_Party/FreeRTOS/Source/include
 steering_motor\ros_msg_pub.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
 steering_motor\ros_msg_pub.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 steering_motor\ros_msg_pub.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
+steering_motor\ros_msg_pub.o: ..\app-user\control_def.h
+steering_motor\ros_msg_pub.o: ../Core/Inc/usart.h
 steering_motor\ros_msg_pub.o: ../Core/Inc/main.h
 steering_motor\ros_msg_pub.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h
 steering_motor\ros_msg_pub.o: ../Core/Inc/stm32f1xx_hal_conf.h
@@ -44,8 +46,5 @@ steering_motor\ros_msg_pub.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_
 steering_motor\ros_msg_pub.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h
 steering_motor\ros_msg_pub.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h
 steering_motor\ros_msg_pub.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
-steering_motor\ros_msg_pub.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
-steering_motor\ros_msg_pub.o: ..\app-user\control_def.h
-steering_motor\ros_msg_pub.o: ../Core/Inc/usart.h
 steering_motor\ros_msg_pub.o: ../Core/Inc/tim.h
-steering_motor\ros_msg_pub.o: ..\app-user\usart_comm.h
+steering_motor\ros_msg_pub.o: ..\app-user\ros_rx.h
