@@ -1,12 +1,10 @@
 #include "usart_comm.h"
 
 #include "usart.h"
-#include "cmsis_os.h"
 #include "stdint.h"
 #include "string.h"
 
 #include "control_def.h"
-#include "joint_ctrl.h"
 
 //串口接收缓冲
 uint8_t buf[ONE_BUF];
@@ -16,8 +14,6 @@ uint8_t rev_buf[DATA_BUF_LEN];
 uint8_t ros_buf[ROS_BUF_LEN];
 
 ros_t ros;
-ros_tx_t ros_tx;
-extern joint_t joint;
 
 void USER_UART_IDLECallback(UART_HandleTypeDef *huart)
 {
@@ -55,8 +51,6 @@ void USER_USART_Init(void)
      __HAL_UART_CLEAR_IDLEFLAG(&huart3);  //清除空闲中断标志
     __HAL_UART_ENABLE_IT(&huart3, UART_IT_IDLE);  //使能串口中断
     HAL_UART_Receive_DMA(&huart3, ros_buf, ROS_BUF_LEN); //开始一次接收
-    
-   
     
 }
 
@@ -111,30 +105,7 @@ void ros_data_handler(uint8_t *pData)
         return;
     }
     else ros.status = GOOD;
-        
 }
 
 
 
-void usart_msg_send_task(void const *argu) {
-    uint32_t thread_wake_time = osKernelSysTick();
-    
-    memset(&ros_tx, 0, ROS_TX_LEN);
-    
-    for(;;) {
-        taskENTER_CRITICAL();
-         /*帧头帧尾*/
-        ros_tx.tx_msg.head1 = 0Xcc;
-        ros_tx.tx_msg.head2 = 0Xff;
-        ros_tx.tx_msg.eof = 0Xaa;
-        
-        ros_tx.tx_msg.finish_flag = joint.finish;
-        
-        memcpy(ros_tx.buff,&ros_tx.tx_msg, ROS_TX_LEN);
-        
-        HAL_UART_Transmit_DMA(&huart3,ros_tx.buff,ROS_TX_LEN);
-                  
-        taskEXIT_CRITICAL();
-        osDelayUntil(&thread_wake_time, 1); 
-    }
-}

@@ -394,6 +394,16 @@
               <FileType>1</FileType>
               <FilePath>..\app-user\usart_comm.c</FilePath>
             </File>
+            <File>
+              <FileName>usart_send_msg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\app-user\usart_send_msg.c</FilePath>
+            </File>
+            <File>
+              <FileName>ros_msg_pub.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\app-user\ros_msg_pub.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

@@ -26,8 +26,11 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "usart_comm.h"
+#include "control_def.h"
 #include "joint_ctrl.h"
+#include "usart_send_msg.h"
+#include "ros_msg_pub.h"
+#include "usart_comm.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -55,6 +58,10 @@ osThreadId defaultTaskHandle;
 /* USER CODE BEGIN FunctionPrototypes */
 osThreadId usart_send_TaskHandle;
 osThreadId joint_TaskHandle;
+osThreadId ros_msg_pub_TaskHandle;
+
+extern QueueHandle_t xViaPointQueue;
+
 /* USER CODE END FunctionPrototypes */
 
 void StartDefaultTask(void const * argument);
@@ -101,6 +108,9 @@ void MX_FREERTOS_Init(void) {
 
   /* USER CODE BEGIN RTOS_QUEUES */
   /* add queues, ... */
+    
+  xViaPointQueue = xQueueCreate(VIA_POINT_NUM, sizeof(point_t));
+
   /* USER CODE END RTOS_QUEUES */
 
   /* Create the thread(s) */
@@ -109,12 +119,16 @@ void MX_FREERTOS_Init(void) {
   defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
-  
-  
+   
   osThreadDef(usart_send_Task, usart_msg_send_task, osPriorityNormal, 0, 128);
   usart_send_TaskHandle = osThreadCreate(osThread(usart_send_Task), NULL);
+  
+  osThreadDef(ros_msg_pub_Task, ros_msg_pub_task, osPriorityNormal, 0, 128);
+  ros_msg_pub_TaskHandle = osThreadCreate(osThread(ros_msg_pub_Task), NULL);
+  
   osThreadDef(joint_Task, joint_task, osPriorityNormal, 0, 128);
   joint_TaskHandle = osThreadCreate(osThread(joint_Task), NULL);
+  
   /* add threads, ... */
   /* USER CODE END RTOS_THREADS */
 

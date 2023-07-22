@@ -107,6 +107,7 @@ int main(void)
     USER_USART_Init();
    
     HAL_Delay(100);
+    
   /* USER CODE END 2 */
 
   /* Call init function for freertos objects (in freertos.c) */

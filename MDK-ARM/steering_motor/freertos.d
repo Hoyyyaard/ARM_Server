@@ -42,8 +42,13 @@ steering_motor\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/ti
 steering_motor\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
 steering_motor\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 steering_motor\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
-steering_motor\freertos.o: ..\app-user\usart_comm.h
-steering_motor\freertos.o: ../Core/Inc/usart.h
+steering_motor\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 steering_motor\freertos.o: ..\app-user\control_def.h
+steering_motor\freertos.o: ../Core/Inc/usart.h
 steering_motor\freertos.o: ../Core/Inc/tim.h
 steering_motor\freertos.o: ..\app-user\joint_ctrl.h
+steering_motor\freertos.o: ..\app-user\usart_comm.h
+steering_motor\freertos.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+steering_motor\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
+steering_motor\freertos.o: ..\app-user\usart_send_msg.h
+steering_motor\freertos.o: ..\app-user\ros_msg_pub.h

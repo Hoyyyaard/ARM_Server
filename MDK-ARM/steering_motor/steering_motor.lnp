@@ -1,6 +1,8 @@
 --cpu Cortex-M3
 "steering_motor\joint_ctrl.o"
 "steering_motor\usart_comm.o"
+"steering_motor\usart_send_msg.o"
+"steering_motor\ros_msg_pub.o"
 "steering_motor\main.o"
 "steering_motor\gpio.o"
 "steering_motor\freertos.o"

@@ -30,8 +30,6 @@ steering_motor\usart_comm.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_p
 steering_motor\usart_comm.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h
 steering_motor\usart_comm.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h
 steering_motor\usart_comm.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h
-steering_motor\usart_comm.o: ..\app-user\control_def.h
-steering_motor\usart_comm.o: ../Core/Inc/tim.h
 steering_motor\usart_comm.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 steering_motor\usart_comm.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
 steering_motor\usart_comm.o: ../Core/Inc/FreeRTOSConfig.h
@@ -46,5 +44,6 @@ steering_motor\usart_comm.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/
 steering_motor\usart_comm.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
 steering_motor\usart_comm.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 steering_motor\usart_comm.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
+steering_motor\usart_comm.o: ..\app-user\control_def.h
+steering_motor\usart_comm.o: ../Core/Inc/tim.h
 steering_motor\usart_comm.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
-steering_motor\usart_comm.o: ..\app-user\joint_ctrl.h

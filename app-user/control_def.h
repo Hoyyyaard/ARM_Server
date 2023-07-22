@@ -13,13 +13,15 @@
 #define ROS_TX_LEN 4
 
 /*****************************steering control* ****************************/
+#define JOINT_PERIOD 2
+
 #define Init_PWM    15
 
 #define J0_PWM        TIM2->CCR2 //PB3
 
-#define J1_PWM        TIM4->CCR1   
-#define J2_PWM        TIM4->CCR2   
-#define J3_PWM        TIM4->CCR3   
-#define J4_PWM        TIM4->CCR4   
+#define J1_PWM        TIM4->CCR3    //PB8
+#define J2_PWM        TIM4->CCR4   //PB9
+#define J3_PWM        TIM4->CCR1  //PB6
+#define J4_PWM        TIM4->CCR2   //PB7
 #endif
 

@@ -35,20 +35,6 @@ typedef struct{
    
 }ros_t;
 
-/*电控侧发送数据包*/
-typedef struct{
-    uint8_t buff[ROS_TX_LEN];    
-    __packed struct{           
-        uint8_t head1;      
-        uint8_t head2;      
-
-        uint8_t finish_flag;
-
-        uint8_t eof;
-    }tx_msg;                  
-}ros_tx_t;
-   
-
 
 void USER_UART_IDLECallback(UART_HandleTypeDef *huart);
 void USER_UART_IRQHandler(UART_HandleTypeDef *huart);
@@ -56,8 +42,6 @@ void USER_USART_Init(void);
 
 void ros_single_data_handler(uint8_t *pData);
 void ros_data_handler(uint8_t *pData);
-
-void usart_msg_send_task(void const *argu);
 
 extern ros_t ros;
 
