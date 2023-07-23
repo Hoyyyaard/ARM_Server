@@ -1,21 +1,17 @@
 #include "joint_ctrl.h"
-/*±ê×¼¿âÎÄ¼þ*/
-#include "control_def.h"
-#include "math.h"
-#include "string.h"
-#include "cmsis_os.h"
-#include "tim.h"
 
-#include "usart_comm.h"
+/*ï¿½ï¿½×¼ï¿½ï¿½ï¿½Ä¼ï¿½*/
+// #include "control_def.h"
+// #include "math.h"
+// #include "string.h"
+// #include "cmsis_os.h"
+// #include "tim.h"
 
-joint_t joint;
+// #include "usart_comm.h"
+
+
 extern ros_t ros;
 extern QueueHandle_t xViaPointQueue;
-
-BaseType_t xStatus_rx;
-float test[5];
-
-int time = 50;
 
 void joint_init(void)
 {
@@ -32,15 +28,15 @@ void joint_init(void)
     }
 }
 
-//ROS²à£º´Óµ×ÅÌÍù»úÐµ±Û¿´£¬J0Ë³Ê±ÕëÕý£¬J1,J2,J3³¯Ç°ÎªÕý£¬J4¼Ð½ôÎªÕý
-//µç¿Ø²à£ºJ0ÄæÊ±ÕëÎªÕý£¬±³¶Ôµ×ÅÌ90¶È,J1³¯ºóÎªÕý£¬J2³¯Ç°ÎªÕý£¬J3³¯Ç°ÎªÕý£¬J4¼Ð½ôÎªÕý
+//ROSï¿½à£ºï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½Û¿ï¿½ï¿½ï¿½J0Ë³Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½J1,J2,J3ï¿½ï¿½Ç°Îªï¿½ï¿½ï¿½ï¿½J4ï¿½Ð½ï¿½Îªï¿½ï¿½
+//ï¿½ï¿½Ø²à£ºJ0ï¿½ï¿½Ê±ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôµï¿½ï¿½ï¿½90ï¿½ï¿½,J1ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½J2ï¿½ï¿½Ç°Îªï¿½ï¿½ï¿½ï¿½J3ï¿½ï¿½Ç°Îªï¿½ï¿½ï¿½ï¿½J4ï¿½Ð½ï¿½Îªï¿½ï¿½
 void joint_control(void)
 {    
-    if(joint.point.flag){    //²»ÊÇ²¹Ö¡
+    if(joint.point.flag){    //ï¿½ï¿½ï¿½Ç²ï¿½Ö¡
         for(int j=0;j<5;j++){                    
             joint.ros_angle[j] = joint.point.angle[j];
             
-            /* ros½Ç¶È×ª»»Îª¶æ»ú¾ø¶Ô½Ç¶È */
+            /* rosï¿½Ç¶ï¿½×ªï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô½Ç¶ï¿½ */
             ros_angle_handler(&joint.ros_angle[j], &joint.steering_angle[j], j);
             
             if(!(joint.steering_angle[j]<10 | joint.steering_angle[j]>165)){  
@@ -67,7 +63,7 @@ void joint_task(void const *argu) {
             joint.finish = 0;
             joint_control();
         }
-        else joint.finish = 1; //¶ÓÁÐÎª¿Õ£¬Ò»Ö¡Â·µã´¦ÀíÍê³É£¬½øÈëµÈ´ý
+        else joint.finish = 1; //ï¿½ï¿½ï¿½ï¿½Îªï¿½Õ£ï¿½Ò»Ö¡Â·ï¿½ã´¦ï¿½ï¿½ï¿½ï¿½É£ï¿½ï¿½ï¿½ï¿½ï¿½È´ï¿½
                   
         taskEXIT_CRITICAL();
         vTaskDelayUntil(&thread_wake_time, time);
@@ -75,8 +71,8 @@ void joint_task(void const *argu) {
 }
 
 /**
-  * @brief ros²à½Ç¶È´¦Àí£¬×ª»»Îª¶æ»ú¾ø¶Ô½Ç¶È
-  * @param ros_angle£ºros²à½Ç¶È£¬steering_angle£º´¦Àíºó¶æ»ú¾ø¶Ô½Ç¶È£¬joint_num£º¹Ø½ÚÊý
+  * @brief rosï¿½ï¿½Ç¶È´ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô½Ç¶ï¿½
+  * @param ros_angleï¿½ï¿½rosï¿½ï¿½Ç¶È£ï¿½steering_angleï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô½Ç¶È£ï¿½joint_numï¿½ï¿½ï¿½Ø½ï¿½ï¿½ï¿½
   * @retval 
   */
 void ros_angle_handler(float *ros_angle, float *steering_angle, int joint_num)
@@ -96,7 +92,7 @@ void ros_angle_handler(float *ros_angle, float *steering_angle, int joint_num)
 }
 
 /**
-  * @brief  ¶æ»ú¾ø¶Ô½Ç¶È¿ØÖÆPWM×ª»»
+  * @brief  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô½Ç¶È¿ï¿½ï¿½ï¿½PWM×ªï¿½ï¿½
   * @param 
   * @retval 
   */

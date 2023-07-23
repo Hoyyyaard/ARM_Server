@@ -10,9 +10,7 @@ extern ros_t ros;
 extern joint_t joint;
 extern QueueHandle_t xViaPointQueue;
 
-int pub_flag[10];
-BaseType_t xStatus_tx;
-int tx_cnt;
+
 
 void ros_msg_pub_task(void const *argu) {
     uint32_t thread_wake_time = osKernelSysTick();   

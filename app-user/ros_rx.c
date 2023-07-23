@@ -2,32 +2,32 @@
 #include "string.h"
 #include "control_def.h"
 
-ros_t ros;
+
 
 /**
-  * @brief Ò»Ö¡½ÓÊÕÒ»¸öbufÊ±½âÎöÊý¾Ý°ü
-  * @param *pData£º´®¿Ú½ÓÊÕÒ»¸öbuf£¬*rev_buf£ºÉèÖÃ×î´ó»º³åÇø
+  * @brief Ò»Ö¡ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½bufÊ±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý°ï¿½
+  * @param *pDataï¿½ï¿½ï¿½ï¿½ï¿½Ú½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½bufï¿½ï¿½*rev_bufï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ó»º³ï¿½ï¿½ï¿½
   * @retval 
   */
 void ros_single_data_handler(uint8_t *pData, uint8_t *rev_buf)
 {
-    memcpy((rev_buf+ros.success_rev_cnt),pData, ONE_BUF); //ÖðÖ¡Ð´ÈëÊý¾Ý»º³åÇø
+    memcpy((rev_buf+ros.success_rev_cnt),pData, ONE_BUF); //ï¿½ï¿½Ö¡Ð´ï¿½ï¿½ï¿½ï¿½ï¿½Ý»ï¿½ï¿½ï¿½ï¿½ï¿½
     ros.success_rev_cnt++;
     
     if(rev_buf[0] != 0xcc){  
         ros.status = HEAD1_ERROR;
         ros.success_rev_cnt=0;  
-        memset(rev_buf, 0, MAX_BUF_LEN);  //Çå¿Õ»º³åÇø£¬ÖØÐÂ½ÓÊÕ
+        memset(rev_buf, 0, MAX_BUF_LEN);  //ï¿½ï¿½Õ»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â½ï¿½ï¿½ï¿½
         return;
     }
-    else if(ros.success_rev_cnt==2 && rev_buf[1]!=0xdc){ //½ÓÊÕµ½Ö¡Í·2
+    else if(ros.success_rev_cnt==2 && rev_buf[1]!=0xdc){ //ï¿½ï¿½ï¿½Õµï¿½Ö¡Í·2
         ros.status = HEAD2_ERROR;
         ros.success_rev_cnt=0;
         memset(rev_buf, 0, MAX_BUF_LEN);
         return;
     }
     
-    if(ros.success_rev_cnt == ROS_BUF_LEN){     //°üÎ²ÅÐ¶Ï
+    if(ros.success_rev_cnt == ROS_BUF_LEN){     //ï¿½ï¿½Î²ï¿½Ð¶ï¿½
         if(rev_buf[ros.success_rev_cnt--] == 0xdd) {      
             memcpy(&ros.rx_angle, rev_buf, ROS_BUF_LEN);                
             memset(rev_buf, 0, MAX_BUF_LEN);  
@@ -41,13 +41,13 @@ void ros_single_data_handler(uint8_t *pData, uint8_t *rev_buf)
     }
 }
 
-/*Ò»Ö¡½ÓÊÕËùÓÐÂ·µãÐÅÏ¢Êý¾Ý½â°ü*/
+/*Ò»Ö¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½Ý½ï¿½ï¿½*/
 void ros_data_handler(uint8_t *pData)
 {
     memset(&ros, 0, sizeof(ros_t));
     memcpy(&ros.rx_angle, pData, ROS_BUF_LEN);
     
-    ros.last_rev_flag = ros.rev_flag; //¸üÐÂÀúÊ·½ÓÊÕ×´Ì¬
+    ros.last_rev_flag = ros.rev_flag; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê·ï¿½ï¿½ï¿½ï¿½×´Ì¬
     if(ros.rx_angle.head1 != 0Xcc){
         ros.status = HEAD1_ERROR;    
         ros.rev_flag = 0;

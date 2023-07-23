@@ -9,7 +9,7 @@
 #include "joint_ctrl.h"
 #include "ros_msg_pub.h"
 
-ros_tx_t ros_tx;
+
 extern joint_t joint;
 extern ros_t ros;
 

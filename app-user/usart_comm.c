@@ -7,11 +7,7 @@
 #include "ros_rx.h"
 
 extern ros_t ros;
-//´®¿Ú½ÓÊÕ»º³å
-uint8_t buf[ONE_BUF];
-uint8_t max_buf[MAX_BUF_LEN];
 
-uint8_t ros_buf[ROS_BUF_LEN];
 
 void USER_UART_IDLECallback(UART_HandleTypeDef *huart)
 {
@@ -30,25 +26,25 @@ void USER_UART_IDLECallback(UART_HandleTypeDef *huart)
     }
 }
 
-/*´®¿Ú¿ÕÏÐÖÐ¶Ï,ÔÚ.itÎÄ¼þÖÐµ÷ÓÃ*/
+/*ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½,ï¿½ï¿½.itï¿½Ä¼ï¿½ï¿½Ðµï¿½ï¿½ï¿½*/
 void USER_UART_IRQHandler(UART_HandleTypeDef *huart)
 {   
-    if(RESET != __HAL_UART_GET_FLAG(huart, UART_FLAG_IDLE)) //ÅÐ¶ÏÊÇ·ñÊÇ¿ÕÏÐÖÐ¶Ï
+    if(RESET != __HAL_UART_GET_FLAG(huart, UART_FLAG_IDLE)) //ï¿½Ð¶ï¿½ï¿½Ç·ï¿½ï¿½Ç¿ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½
     {
-        __HAL_UART_CLEAR_IDLEFLAG(huart);                     //Çå³ý¿ÕÏÐÖÐ¶Ï±êÖ¾£¨·ñÔò»áÒ»Ö±²»¶Ï½øÈëÖÐ¶Ï£©
-        HAL_UART_DMAStop(huart);							//Í£Ö¹±¾´ÎDMAÔËÊä
-        USER_UART_IDLECallback(huart);                     //µ÷ÓÃ´®¿Ú¹¦ÄÜ»Øµ÷º¯Êý
+        __HAL_UART_CLEAR_IDLEFLAG(huart);                     //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶Ï±ï¿½Ö¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»Ö±ï¿½ï¿½ï¿½Ï½ï¿½ï¿½ï¿½ï¿½Ð¶Ï£ï¿½
+        HAL_UART_DMAStop(huart);							//Í£Ö¹ï¿½ï¿½ï¿½ï¿½DMAï¿½ï¿½ï¿½ï¿½
+        USER_UART_IDLECallback(huart);                     //ï¿½ï¿½ï¿½Ã´ï¿½ï¿½Ú¹ï¿½ï¿½Ü»Øµï¿½ï¿½ï¿½ï¿½ï¿½
     }
 }
 
 void USER_USART_Init(void)
 {
-    __HAL_UART_CLEAR_IDLEFLAG(&huart1);  //Çå³ý¿ÕÏÐÖÐ¶Ï±êÖ¾
-    __HAL_UART_ENABLE_IT(&huart1, UART_IT_IDLE);  //Ê¹ÄÜ´®¿ÚÖÐ¶Ï
-    HAL_UART_Receive_DMA(&huart1, ros_buf, ROS_BUF_LEN); //¿ªÊ¼Ò»´Î½ÓÊÕ
+    __HAL_UART_CLEAR_IDLEFLAG(&huart1);  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶Ï±ï¿½Ö¾
+    __HAL_UART_ENABLE_IT(&huart1, UART_IT_IDLE);  //Ê¹ï¿½Ü´ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½
+    HAL_UART_Receive_DMA(&huart1, ros_buf, ROS_BUF_LEN); //ï¿½ï¿½Ê¼Ò»ï¿½Î½ï¿½ï¿½ï¿½
     
-     __HAL_UART_CLEAR_IDLEFLAG(&huart3);  //Çå³ý¿ÕÏÐÖÐ¶Ï±êÖ¾
-    __HAL_UART_ENABLE_IT(&huart3, UART_IT_IDLE);  //Ê¹ÄÜ´®¿ÚÖÐ¶Ï
-    HAL_UART_Receive_DMA(&huart3, ros_buf, ROS_BUF_LEN); //¿ªÊ¼Ò»´Î½ÓÊÕ
+     __HAL_UART_CLEAR_IDLEFLAG(&huart3);  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶Ï±ï¿½Ö¾
+    __HAL_UART_ENABLE_IT(&huart3, UART_IT_IDLE);  //Ê¹ï¿½Ü´ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½
+    HAL_UART_Receive_DMA(&huart3, ros_buf, ROS_BUF_LEN); //ï¿½ï¿½Ê¼Ò»ï¿½Î½ï¿½ï¿½ï¿½
     
 }
